@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- meta tags importantes/necessárias -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta content="text/html" charset="ISO-8859-1" http-equiv="content-type">
+        
+        <!-- título da página -->
+        <title>
+            runner de teste funcional do nezha
+        </title>
+
+        <!-- scripts -->
+        <script type="text/javascript" src="nezha-browserbot.js"></script>
+        <script type="text/javascript" src="nezha-fitrunner.js"></script>
+        <script type="text/javascript" src="htmlutils.js"></script>
+    </head>
+    
+    <body onload="javascript:loadSuiteFrame();">
+        <!-- botões para rodar os testes -->
+        <button type="button" id="runTest" onclick="runSingleTest();" style="margin-top: 10pt; cursor: pointer; cursor: hand;">
+            rodar teste funcional
+        </button>
+
+        <button type="button" id="runSuite" onclick="startTestSuite();" style="margin-top: 10pt; cursor: pointer; cursor: hand;">
+            rodar teste suite
+        </button>
+
+        <p/>
+
+        <iframe
+            name="testSuiteFrame"
+            id="testSuiteFrame"
+            width="220px"
+            height="15%"
+            frameborder="0"
+            src="./tests/TestSuite.html"
+        ></iframe>
+
+        <div style="position: absolute; top: 20px; left: 500px;">
+            <b>
+                tempo passado:
+            </b>
+
+            &nbsp;&nbsp;
+
+            <span id="elapsedTime">
+                00:00
+            </span>
+        </div>
+
+        <div style="position: absolute; top: 60px; left: 300px;">
+            <table>
+                <tr>
+                    <td colspan="2" align="center">
+                        <b>
+                            testar resultados
+                        </b>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="width: 100px; height: 50px;" align="center">
+                        passados:&nbsp;&nbsp;
+
+                        <span id="testRuns">
+                            0
+                        </span>
+                    </td>
+
+                    <td style="width: 100px; height: 50px;" align="center">
+                        falhas:&nbsp;&nbsp;
+
+                        <span id="testFailures">
+                            0
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="position: absolute; top: 60px; left: 600px;">
+            <table>
+                <tr>
+                    <td colspan="3" align="center">
+                        <b>
+                            resultados de comandos
+                        </b>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="width: 100px; height: 50px;" align="center">
+                        passados:&nbsp;&nbsp;
+
+                        <span id="commandPasses">
+                            0
+                        </span>
+                    </td>
+                    
+                    <td style="width: 100px; height: 50px;" align="center">
+                        falhas:&nbsp;&nbsp;
+
+                        <span id="commandFailures">
+                            0
+                        </span>
+                    </td>
+                    
+                    <td style="width: 100px; height: 50px;" align="center">
+                        erros:&nbsp;&nbsp;
+
+                        <span id="commandErrors">
+                            0
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <iframe
+            name="testFrame"
+            id="testFrame"
+            style="float: left; margin-top: 10px;"
+            height="75%"
+            width="32%"
+            src=""
+            frameborder="0"
+        ></iframe>
+
+        <iframe
+            name="myiframe"
+            id="myiframe"
+            style="float: right; margin-top: 10px;"
+            height="75%"
+            width="65%"
+            src=""
+            frameborder="0"
+        ></iframe>
+
+        <br>
+    </body>
+</html>
