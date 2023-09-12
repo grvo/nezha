@@ -1,0 +1,61 @@
+<project name="nezha" default="jar">
+    <property name="version" value="0.1-SNAPSHOT"/>
+
+    <path id="classpath">
+        <fileset dir="lib"/>
+
+        <pathelement location="target/classes"/>
+        <pathelement location="target/test-classes"/>
+    </path>
+
+    <target name="compile" description="compilar fonte do java">
+        <mkdir dir="target/classes"/>
+
+        <javac destdir="target/classes" classpathhref="classpath" debug="on">
+            <src location="main"/>
+        </javac>
+
+        <mkdir dir="target/test-classes"/>
+
+        <javac destdir="target/test-classes" classpathhref="classpath" debug="on">
+            <src location="test"/>
+        </javac>
+    </target>
+
+    <target name="test">
+        <mkdir dir="target/test-logs"/>
+
+        <fail unless="browser">especifique -Dbrowser=firefox (ou algum outro navegador) na linha de comando ao rodar os testes</fail>
+
+        <junit dir="../javascript" fork="yes" forkmode="once" printsummary="yes" failureproperty="tests.failed">
+            <jvmarg value="-Dbrowser=${browser}"/>
+            <classpath refid="classpath"/>
+
+            <formatter type="xml"/>
+            <formatter type="plain"/>
+
+            <batchtest todir="target/test-logs">
+                <fileset dir="test"/>
+            </batchtest>
+        </junit>
+
+        <mkdir dir="target/test-reports"/>
+
+        <junitreport todir="target/test-reports">
+            <fileset dir="target/test-logs">
+                <include name="TEST-*.xml"/>
+
+                <!-- sempre vazio por algum motivo -->
+                <exclude name="TEST-com.thoughtworks.nezha.NezhaIntegrationTest.xml"/>
+            </fileset>
+
+            <report format="frames" todir="target/test-reports" styledir="${ant.home}/etc"/>
+        </junitreport>
+
+        <fail if="tests.failed">aqui estão as falhas dos testes</fail>
+    </target>
+
+    <target name="jar" depends="compile, test" description="classes java do jar">
+        <jar basedir="target/classes" destfile="target/${ant.project.name}-${version}.jar"/>
+    </target>
+</project>
